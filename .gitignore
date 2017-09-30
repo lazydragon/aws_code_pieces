@@ -1,2 +1,4 @@
 activate
 env
+*bigfile
+*.sw*
