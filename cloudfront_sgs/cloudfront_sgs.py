@@ -148,13 +148,18 @@ def main():
     Update matching security groups with the SERVICE ranges
     """
     ip_ranges = json.loads(get_ip_groups_json('https://ip-ranges.amazonaws.com/ip-ranges.json'))
+    ips = []
+    for ip in ip_ranges['prefixes']:
+        if ip['region'] == 'us-west-2' and ip['service'] != 'CLOUDFRONT':
+            ips.append(ip['ip_prefix'])
+    print ips
 
     # extract the service ranges
-    cf_ranges = get_ranges_for_service(ip_ranges, SERVICE)
+    #cf_ranges = get_ranges_for_service(ip_ranges, SERVICE)
 
     # update the security groups
-    result = update_security_groups(cf_ranges)
-    print "\n".join(result)
+    #result = update_security_groups(cf_ranges)
+    #print "\n".join(result)
 
 if __name__ == "__main__":
     main()

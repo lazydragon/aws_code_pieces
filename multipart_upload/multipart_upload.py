@@ -1,3 +1,4 @@
+import time
 import boto3
 from boto3.s3.transfer import TransferConfig
 from botocore.config import Config
@@ -38,5 +39,8 @@ config = TransferConfig(multipart_threshold=multipart_threshold,
                         use_threads=use_threads)
 
 # Upload tmp.txt to bucket-name at key-name
+before = time.time()
 s3.upload_file(to_upload, bucket, key, Config=config)
+after = time.time()
+print (after - before)
 
