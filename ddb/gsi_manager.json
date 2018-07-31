@@ -1,0 +1,24 @@
+[
+  {
+    "Create": {
+      "IndexName": "gsi_manager",
+      "KeySchema": [
+        {
+          "AttributeName": "is_manager",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "title",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 10,
+        "WriteCapacityUnits": 10
+      }
+    }
+  }
+]

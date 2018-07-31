@@ -1,0 +1,24 @@
+[
+  {
+    "Create": {
+      "IndexName": "gsi_responsecode",
+      "KeySchema": [
+        {
+          "AttributeName": "gsi_responsecode_hk",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "gsi_responsecode_sk",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "KEYS_ONLY"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 2000,
+        "WriteCapacityUnits": 10
+      }
+    }
+  }
+]

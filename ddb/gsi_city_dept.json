@@ -1,0 +1,24 @@
+[
+  {
+    "Create": {
+      "IndexName": "gsi_city_dept",
+      "KeySchema": [
+        {
+          "AttributeName": "state",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "city_dept",
+          "KeyType": "RANGE"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 10,
+        "WriteCapacityUnits": 10
+      }
+    }
+  }
+]
