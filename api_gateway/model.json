@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "NewsArticleInputModel",
+  "type": "object",
+  "required": ["count", "items"],
+  "properties": {
+    "count": { "type": "integer" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "last_updated_date": { "type": "string" },
+          "expire_date": { "type": "string" },
+          "author_first_name": { "type": "string" },
+          "description": { "type": "string" },
+          "creation_date": { "type": "string" },
+          "title": { "type": "string" },
+          "allow_comment": { "type": "string" },
+          "author": {
+            "type": "object",
+            "properties": {
+              "last_name": { "type": "string" },
+              "email": { "type": "string" },
+              "first_name": { "type": "string" }
+            }
+          },
+          "body": { "type": "string" },
+          "publish_date": { "type": "string" },
+          "version": { "type": "string" },
+          "author_last_name": { "type": "string" },
+          "parent_id": { "type": "integer" },
+          "article_url": { "type": "string" }
+        }
+      }
+    },
+    "version": { "type": "integer" }
+  }
+}
+,
+

@@ -1,0 +1,45 @@
+{
+   "Version": "2012-10-17",
+   "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::account-id:user/Alice",
+                    "account-id"
+                ]
+            },
+            "Action": "execute-api:Invoke",
+            "Resource": [
+                "arn:aws:execute-api:region:account-id:api-id/stage/GET/pets"
+            ]
+        }
+    ]
+}
+,
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "execute-api:Invoke",
+            "Resource": [
+                "arn:aws:execute-api:region:account-id:api-id/*"
+            ]
+        },
+        {
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "execute-api:Invoke",
+            "Resource": [
+               "arn:aws:execute-api:region:account-id:api-id/*"
+            ],
+            "Condition" : {
+                "IpAddress": {
+                    "aws:SourceIp": ["192.0.2.0/24", "198.51.100.0/24" ]
+                }
+            }
+        }
+    ]
+}

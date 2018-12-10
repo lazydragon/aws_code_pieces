@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A demo of configuring api gateway features
+Outputs:
+  AuthName:
+    Description: auth lambda generated
+    Value:
+      Ref: apigatewayauthorizerpython
+  LambdaName:
+    Description: Lambda function name generated
+    Value:
+      Ref: Lambda
+Resources:
+  ConfigLambdaPermission:
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Ref: Lambda
+      Principal: apigateway.amazonaws.com
+    Type: AWS::Lambda::Permission
+  Lambda:
+    Properties:
+      CodeUri: s3://sam-source-andrew/cb37d432a4497b3514c94eacbc226338
+      Events:
+        Demo:
+          Properties:
+            Method: ANY
+            Path: /demo/
+          Type: Api
+      Handler: lambda.lambda_handler
+      Runtime: python3.6
+    Type: AWS::Serverless::Function
+  apigatewayauthorizerpython:
+    Properties:
+      CodeUri: s3://sam-source-andrew/cb37d432a4497b3514c94eacbc226338
+      Handler: auth.lambda_handler
+      Policies:
+      - Statement:
+        - Action:
+          - sns:Publish
+          Effect: Allow
+          Resource: arn:aws-cn:sns:*:*:*
+        Version: '2012-10-17'
+      Runtime: python2.7
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31

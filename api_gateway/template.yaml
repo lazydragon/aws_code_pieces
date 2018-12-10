@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: A demo of configuring api gateway features 
+Resources:
+  Lambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda.lambda_handler
+      Runtime: python3.6 
+      CodeUri: ./src
+      Events:
+        Demo:
+          Type: Api
+          Properties:
+            Path: /demo/
+            Method: ANY
+  apigatewayauthorizerpython:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: auth.lambda_handler
+      Runtime: python2.7
+      CodeUri: ./src
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - 'sns:Publish'
+              Resource: 'arn:aws-cn:sns:*:*:*'
+  ConfigLambdaPermission:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref Lambda
+      Principal: apigateway.amazonaws.com
+Outputs:
+  LambdaName:
+    Description: Lambda function name generated
+    Value: !Ref Lambda
+  AuthName:
+    Description: auth lambda generated 
+    Value: !Ref apigatewayauthorizerpython
