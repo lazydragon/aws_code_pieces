@@ -2,3 +2,4 @@ activate
 env
 *bigfile
 *.sw*
+*.pyc
