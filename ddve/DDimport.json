@@ -1,0 +1,9 @@
+{
+        "Description": "DDVE",
+        "Format": "vmdk",
+        "UserBucket":{
+                "S3Bucket": "andrew-test",
+                "S3Key": "ddve-aws-6.1.30.0-583978-osdisk.vmdk"
+        }
+}
+
